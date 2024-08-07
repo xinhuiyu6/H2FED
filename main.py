@@ -193,7 +193,7 @@ def main(dataset, subject_split_file_path, train_subject_path, rounds, clients, 
         model_1 = HARBox_1DCNN().to(device)
         model_2 = HARBox_1DCNNtiny().to(device)
         [models.append(copy.deepcopy(model_1).to(device)) for _ in range(clients_h)]
-        [models.append(copy.deepcopy(model_2).to(device)) for _ in range(clients_h)]
+        [models.append(copy.deepcopy(model_2).to(device)) for _ in range(clients - clients_h)]
 
         generator_base = box_generator(z_size=z_latent_dim, input_feat=window_size * d, fc_units=fc_units).to(device)
         generators = [copy.deepcopy(generator_base).to(device) for _ in range(clients_h)]

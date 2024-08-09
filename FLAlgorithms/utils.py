@@ -44,13 +44,13 @@ def kdloss(y, teacher_scores):
     return l_k1
 
 
-def normalize(data):
+def norm(data):
     mean = np.mean(data, axis=0, keepdims=True)
     std = np.std(data, axis=0, keepdims=True)
     return (data-mean)/std
 
 
-def normalize_tensor(data):
+def norm_tensor(data):
     mean = torch.mean(data, dim=0, keepdim=True)
     std = torch.std(data, dim=0, keepdim=True)
     normalized_data = (data - mean) / std
@@ -59,7 +59,7 @@ def normalize_tensor(data):
 
 
 # process data
-def id2data_2d_array(abs_path, data_list, shape, used_label):
+def id2data_2d_array(abs_path, data_list, shape, used_label, normalize=True):
     data = np.zeros((0, shape[0], shape[1]))
     label = np.zeros((0, 1))
 
@@ -79,12 +79,13 @@ def id2data_2d_array(abs_path, data_list, shape, used_label):
         label = np.concatenate((label, mapped_label), axis=0)
         count = count + 1
 
-    data = normalize(data)
+    if normalize == True:
+        data = norm(data)
     data = data.reshape(-1, shape[0], shape[1])
     return data, label
 
 
-def id2data(abs_path, data_list, shape, used_label):
+def id2data(abs_path, data_list, shape, used_label, normalize=True):
 
     num = len(data_list)
     d = np.prod(shape)
@@ -108,5 +109,6 @@ def id2data(abs_path, data_list, shape, used_label):
         count = count + 1
 
     data = data.reshape(-1, shape[0], shape[1])
-    data, mean, std = normalize_tensor(data)
+    if normalize == True:
+        data, _, _ = norm_tensor(data)
     return data, label

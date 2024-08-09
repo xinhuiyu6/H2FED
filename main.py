@@ -222,8 +222,8 @@ def run():
 
     parser.add_argument('--dataset', type=str, default="PAMAP2",
                         choices=["PAMAP2", "UCI-HAR", "WISDM", "USC-HAD", "EHR", "HARBox"])
-    parser.add_argument('--subject_split_file_path', type=str, default='datasplit/pamap2/train-test-split')
-    parser.add_argument('--train_subject_path', type=str, default='datasplit/pamap2/10/train-subject')
+    parser.add_argument('--subject_split_file_path', type=str, help='subject ids')
+    parser.add_argument('--train_subject_path', type=str, help='subject data')
     parser.add_argument('--rounds', type=int, default=20)
     parser.add_argument('--clients', type=int, default=7)
     parser.add_argument('--clients_h', type=int, default=2)

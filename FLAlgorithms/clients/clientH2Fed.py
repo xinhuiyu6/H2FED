@@ -1,3 +1,4 @@
+import numpy as np
 import torch
 import torch.nn as nn
 
@@ -45,11 +46,13 @@ class ClientH2Fed(Client):
         ############################################
         ######### training for all clients #########
         ############################################
+
         train_data, train_label = id2data_2d_array(self.data_path, self.train_data_name_list,
                                                    [self.window_size, self.d], self.label_used)
 
         train_data_unlabel, _ = id2data_2d_array(self.data_path, self.train_data_unlabel_name_list,
                                                  [self.window_size, self.d], self.label_used)
+
         train_data_augment = self.rand(train_data_unlabel)
 
         num = train_data.shape[0]
@@ -187,7 +190,6 @@ class ClientH2Fed(Client):
         # evaluate
         acc, f1, kappa = self.test()
         print('CURRENT ROUND: {}, CLIENT IINDEX: {}, ACC: {}, F1:{}, KAPPA:{}'.format(current_round, client_index, acc, f1, kappa))
-        print('Frequency of GANS: {}'.format(self.gan_f))
 
         return self.model, lr, generator_dp
 

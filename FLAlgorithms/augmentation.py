@@ -12,7 +12,6 @@ def scaling_transform_vectorized(X, sigma=0.1):
     return X * scaling_factor
 
 
-
 def augment_list():
     l = [
         (noise_transform_vectorized),

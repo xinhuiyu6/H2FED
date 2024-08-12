@@ -29,6 +29,7 @@ class H2Fed(Server):
 
         data_path = []
 
+        # Each list consists of sub-lists for each client. Each sublist stores the filenames of the data
         for i in range(clients):
             id = train_subject_list[i]
 
